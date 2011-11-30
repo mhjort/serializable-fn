@@ -20,5 +20,5 @@
      {:type ::serializable-fn
       ::source ~(save-env (vals &env) &form)}))
 
-(defmethod print-method ::serializable-fn [o ^Writer w]
+(defmethod print-method ::serializable-fn [o ^java.io.Writer w]
   (print-method (::source (meta o)) w))

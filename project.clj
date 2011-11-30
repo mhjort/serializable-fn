@@ -1,5 +1,5 @@
-(defproject serializable-fn "1.1.1"
+(defproject org.clojars.weissjeffm/serializable-fn "1.2"
   :url "http://github.com/technomancy/serializable-fn"
   :author "Seajure"
   :description "Make functions that have pretty representations."
-  :dependencies [[org.clojure/clojure "1.2.1"]])
+  :dev-dependencies [[org.clojure/clojure "1.3.0"]])
