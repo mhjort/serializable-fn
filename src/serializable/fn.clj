@@ -3,9 +3,7 @@
   (:refer-clojure :exclude [fn]))
 
 (defn- save-env [bindings form]
-  (let [form (with-meta (cons `fn (rest form)) ; serializable/fn, not core/fn
-               (meta form))
-        quoted-form `(quote ~form)]
+  (let [quoted-form `(quote ~form)]
     (if bindings
       `(list `let ~(vec (apply concat (for [b bindings]
                                         [`(quote ~(.sym b))

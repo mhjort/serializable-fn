@@ -1,7 +1,6 @@
 (ns serializable.fn-test
-  (:refer-clojure :exclude [fn])
-  (:use [serializable.fn]
-        [clojure.test]))
+  (:require serializable.fn)
+  (:use clojure.test))
 
 (def dinc-list '(serializable.fn/fn [x] (inc (inc x))))
 
@@ -36,16 +35,17 @@
 (deftest roundtrip-with-lexical-nonconst-context
   (let [x 10, y (inc x)]
     (is (= 11
-           (round-trip (fn [] y))))))
+           (round-trip (serializable.fn/fn [] y))))))
 
 (deftest roundtrip-with-fnarg-context
   (is (= 11
-         (round-trip ((fn [x]
+         (round-trip ((serializable.fn/fn [x]
                         (let [y (inc x)]
-                          (fn [] y)))
+                          (serializable.fn/fn [] y)))
                       10)))))
 
 (deftest roundtrip-twice!
   (is (= 5
          ((write+read (write+read (let [x 5]
-                                    (fn [] x))))))))
+                                    (serializable.fn/fn [] x)))))))
+)
