@@ -47,5 +47,7 @@
 (deftest roundtrip-twice!
   (is (= 5
          ((write+read (write+read (let [x 5]
-                                    (serializable.fn/fn [] x)))))))
-)
+                                    (serializable.fn/fn [] x))))))))
+
+(deftest roundtrip-with-lexical-context-needs-quoting
+  (is (= 'foo (round-trip (let [x 'foo] (serializable.fn/fn [] x))))))
